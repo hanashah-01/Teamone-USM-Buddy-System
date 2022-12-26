@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:teamone_app/screens/forgotpass_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:teamone_app/screens/homescreen.dart';
-import 'package:teamone_app/screens/login.dart';
-import 'package:teamone_app/screens/otp_screen.dart';
-import 'package:teamone_app/screens/signup.dart';
 
-void main() => runApp(MyApp());
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget{
   @override

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705223084792",
+    "project_id": "digitalic-197a1",
+    "storage_bucket": "digitalic-197a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705223084792:android:eb3d45f0ee9b12d099090d",
+        "android_client_info": {
+          "package_name": "com.example.teamone_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705223084792-8fpjhr61d3d368oj0rnkpin58aq5p4n6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqffWJhEB2IZIbABVULrIIAkoJJXoZOkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705223084792-8fpjhr61d3d368oj0rnkpin58aq5p4n6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
