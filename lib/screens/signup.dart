@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teamone_app/screens/homescreen.dart';
 import 'package:teamone_app/utils/colors_util.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -20,7 +21,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
               Padding(
                 padding: const EdgeInsets.only(right:320),
-                child: Image.asset("assets/images/back_button.png", height: 41, width: 41),
+                child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) => new HomeScreen())),
+                    child: Image.asset("assets/images/back_button.png", height: 41, width: 41)),
               ),
 
               SizedBox(height: 20),
