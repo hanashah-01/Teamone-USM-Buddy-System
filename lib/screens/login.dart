@@ -12,7 +12,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: hexStringToColor("E5E5E5"),
+      backgroundColor: hexStringToColor("FFFFFF"),
       body:SafeArea(
         child: Column(
             children: [
