@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:teamone_app/screens/signup.dart';
 import 'package:teamone_app/utils/colors_util.dart';
+import 'package:email_auth/email_auth.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key}) : super(key: key);
@@ -9,6 +13,35 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
+  final TextEditingController _otpController = TextEditingController();
+
+  late EmailAuth emailAuth;
+
+  void sendOTP() async{
+    emailAuth =  new EmailAuth(sessionName: "Test Session");
+    var res = await emailAuth.sendOtp(recipientMail: user.email!);
+    if (res){
+      Fluttertoast.showToast(msg: "OTP sent.",toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2, backgroundColor: hexStringToColor("9E88B2"));
+    }else{
+      Fluttertoast.showToast(msg: "We could not send the OTP.",toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2, backgroundColor: hexStringToColor("9E88B2"));
+    }
+  }
+
+  void verifyOTP(){
+    var res = emailAuth.validateOtp(
+      recipientMail: user.email!, userOtp: _otpController.text);
+    if (res){
+      Fluttertoast.showToast(msg: "OTP Verified.",toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2, backgroundColor: hexStringToColor("9E88B2"));
+    }else{
+      Fluttertoast.showToast(msg: "Invalid OTP.",toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2, backgroundColor: hexStringToColor("9E88B2"));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +101,27 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
 
+              SizedBox(height: 15),
+
+              Padding(
+                padding: const EdgeInsets.only(right: 22),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: sendOTP,
+                      child: Text(
+                        "Send OTP",
+                        style: TextStyle(
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               SizedBox(height: 30),
 
               Padding(
@@ -79,13 +133,16 @@ class _OtpScreenState extends State<OtpScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
-                    child: Text(
-                      'Verify',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    child: GestureDetector(
+                      onTap: verifyOTP,
+                      child: Text(
+                        'Verify',
+                        style: TextStyle(
+                          fontFamily: 'Urbanist',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),

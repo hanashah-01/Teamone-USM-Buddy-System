@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:teamone_app/screens/login.dart';
 import 'package:teamone_app/utils/colors_util.dart';
 
 class ForgotPassScreen extends StatefulWidget {
@@ -9,6 +11,14 @@ class ForgotPassScreen extends StatefulWidget {
 }
 
 class _ForgotPassScreenState extends State<ForgotPassScreen> {
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose(){
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +30,10 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
 
               Padding(
                 padding: const EdgeInsets.only(right:320),
-                child: Image.asset("assets/images/back_button.png", height: 41, width: 41),
+                child: GestureDetector
+                  (onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => new LoginPage())),
+                    child: Image.asset("assets/images/back_button.png", height: 41, width: 41)),
               ),
 
               SizedBox(height: 20),
@@ -59,6 +72,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: TextField(
+                      controller: _emailController,
                         decoration: InputDecoration(
                           border:InputBorder.none,
                           hintText: 'Enter your student e-mail',
@@ -79,13 +93,16 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
-                    child: Text(
-                      'Send Code',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    child: GestureDetector(
+                      onTap: passwordReset,
+                      child: Text(
+                        'Reset Password',
+                        style: TextStyle(
+                          fontFamily: 'Urbanist',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -103,12 +120,16 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    ' Login',
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      color: hexStringToColor("9E88B2"),
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) => new LoginPage())),
+                    child: Text(
+                      ' Login',
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        color: hexStringToColor("9E88B2"),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -117,4 +138,24 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
       ),
     );
   }
+
+  Future passwordReset() async{
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(
+          content: Text(
+              "The password reset link has been sent to your e-mail."),
+        );
+      });
+    } on FirebaseAuthException catch (e){
+      print(e);
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          content: Text(e.message.toString()),
+        );
+      });
+    }
+  }
+
 }

@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:teamone_app/screens/homescreen.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();

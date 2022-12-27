@@ -41,6 +41,12 @@ dependencies:
 
   cloud_firestore: ^4.3.0
 
+  firebase_auth: ^4.2.3
+
+  fluttertoast: ^8.1.2
+
+  email_auth: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
