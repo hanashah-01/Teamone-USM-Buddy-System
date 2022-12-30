@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:teamone_app/screens/homescreen.dart';
 import 'package:teamone_app/screens/login.dart';
-import 'package:teamone_app/screens/otp_screen.dart';
+import 'package:teamone_app/screens/verify_email_page.dart';
 import 'package:teamone_app/utils/colors_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -190,6 +190,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Center(
                     child: GestureDetector(
                       onTap: signUp,
+
                       child: Text(
                         'Register',
                         style: TextStyle(
@@ -203,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),),
 
-              SizedBox(height: 50),
+              SizedBox(height: 40),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -253,8 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
       addUserDetails(_fullNameController.text.trim(), _phoneNumberController.text.trim(), _emailController.text.trim(),
           _passwordController.text.trim());
 
-      Navigator.of(context).push(new MaterialPageRoute(
-          builder: (BuildContext context) => new OtpScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyEmailPage()));
     }
     }
 

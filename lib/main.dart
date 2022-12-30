@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:teamone_app/screens/homescreen.dart';
+import 'package:teamone_app/utils/colors_util.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
+          primarySwatch: Colors.deepPurple,
         ),
         home: const HomeScreen(),
     );
