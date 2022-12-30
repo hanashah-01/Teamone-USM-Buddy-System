@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teamone_app/screens/forgotpass_screen.dart';
 import 'package:teamone_app/screens/homescreen.dart';
+import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/signup.dart';
 import 'package:teamone_app/utils/colors_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -135,7 +136,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: GestureDetector(
-                  onTap: signIn,
+                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new MainPage())),
                   child: Container(
                     padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
