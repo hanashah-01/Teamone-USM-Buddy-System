@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +14,10 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           "Teamone",
-          style: TextStyle(color: Colors.white, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -22,12 +25,26 @@ class MainPage extends StatelessWidget {
         onPressed: () {},
         child: const Icon(Icons.add),
       ),
-      body: GoogleMap(
-        mapType: MapType.terrain,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 110,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: GoogleMap(
+            mapType: MapType.terrain,
+              onMapCreated: (GoogleMapController controller) {
+              },
+              initialCameraPosition: _kGooglePlex,
+      ),
+          ),
+          buildProfileTile(),
 
-        onMapCreated: (GoogleMapController controller) {
+          buildTextField(),
 
-        }, initialCameraPosition: _kGooglePlex,
+          buildCurrentLocationIcon(),
+      ],
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -57,6 +74,116 @@ class MainPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildProfileTile(){
+    return Positioned(
+        top: 30,
+        left: 20,
+        right: 20,
+        child: Container(
+          width: Get.width,
+
+          child: Row(
+            children: [
+
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.deepPurpleAccent,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Good Day!',
+                          style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontFamily: 'Urbanist',
+                            fontSize: 14,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Jane Doe!',
+                          style: TextStyle(
+                            color: Colors.deepPurpleAccent,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text("Do you want an accompany?", style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.deepPurple),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+
+  Widget buildTextField(){
+    return Positioned(
+      top: 130,
+      left: 10,
+      right: 10,
+      child: Container(
+        width: Get.width,
+        height:50,
+        padding: EdgeInsets.only(left: 15),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              spreadRadius: 4,
+              blurRadius: 10,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: TextFormField(
+
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Color(0xffA7A7A7)),
+          decoration: InputDecoration(
+            hintText: 'Search for a destination',
+            hintStyle: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.bold),
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Icon(
+                Icons.search,
+              ),
+          ),
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCurrentLocationIcon(){
+    return Align(
+      alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 100, right: 12),
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.deepPurple,
+            child: Icon(Icons.my_location, color: Colors.white,),
+          ),
+        ),
     );
   }
 }
