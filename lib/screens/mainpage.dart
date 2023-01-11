@@ -1,22 +1,49 @@
+import 'dart:async';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:teamone_app/screens/searchpage.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+class MainPage extends StatefulWidget {
+  MainPage({Key? key}) : super(key: key);
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  LatLng? currentPosition;
+  final Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> markers = {};
+  @override
+  void initState() {
+    getCurrentLocation();
+    super.initState();
+  }
+
+  void getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      currentPosition = LatLng(position.latitude, position.longitude);
+      markers.add(
+        Marker(
+          markerId: MarkerId('12'),
+          position: currentPosition!,
+          infoWindow: InfoWindow(title: 'Hi!!! Jane\'s here'),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Teamone",
+          "TeamOne",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
@@ -33,15 +60,17 @@ class MainPage extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: GoogleMap(
-            mapType: MapType.terrain,
-              onMapCreated: (GoogleMapController controller) {
+              mapType: MapType.terrain,
+              markers: markers,
+              initialCameraPosition: CameraPosition(target: currentPosition!, zoom: 15),
+              onMapCreated: (GoogleMapController controller){
+                _controller.complete(controller);
               },
-              initialCameraPosition: _kGooglePlex,
-      ),
+            ),
           ),
           buildProfileTile(),
 
-          buildTextField(),
+          //buildTextField(),
 
           buildCurrentLocationIcon(),
       ],
@@ -60,7 +89,12 @@ class MainPage extends StatelessWidget {
                     onPressed: () {},
                 ),
                 IconButton(icon: Icon(Icons.search),
-                    onPressed: () {},
+                    onPressed: () {
+                      //Navigator.push(
+                       // context,
+                       // MaterialPageRoute(builder: (context) => const SearchPage()),
+                      //);
+                    },
                 ),
                 const SizedBox(width: 24),
                 IconButton(icon: Icon(Icons.call),
@@ -131,7 +165,8 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(){
+
+ /* Widget buildTextField(){
     return Positioned(
       top: 130,
       left: 10,
@@ -152,7 +187,7 @@ class MainPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: TextFormField(
-
+          readOnly: true,
           style: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -171,7 +206,7 @@ class MainPage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
   Widget buildCurrentLocationIcon(){
     return Align(
