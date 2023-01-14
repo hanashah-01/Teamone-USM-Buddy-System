@@ -47,25 +47,15 @@ dependencies:
 
   email_auth: ^1.0.0
 
+  google_maps_flutter: ^2.0.6
+
   flutter_polyline_points: ^1.0.0
 
   location: ^4.3.0
 
-  google_maps_flutter: ^2.0.6
-
-  flutter_google_places: ^0.3.0
-
   geolocator: ^7.2.0+1
 
-  flutter_bloc: ^7.0.0
-
-  equatable: ^2.0.3
-
-  bloc: ^7.0.0
-
   geocoding: ^2.0.0
-
-  http: ^0.13.3
 
   get: ^4.6.5
 

@@ -69,10 +69,6 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           buildProfileTile(),
-
-          //buildTextField(),
-
-          buildCurrentLocationIcon(),
       ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -90,10 +86,10 @@ class _MainPageState extends State<MainPage> {
                 ),
                 IconButton(icon: Icon(Icons.search),
                     onPressed: () {
-                      //Navigator.push(
-                       // context,
-                       // MaterialPageRoute(builder: (context) => const SearchPage()),
-                      //);
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapView()),
+                      );
                     },
                 ),
                 const SizedBox(width: 24),
@@ -160,63 +156,6 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
             ],
-          ),
-        ),
-    );
-  }
-
-
- /* Widget buildTextField(){
-    return Positioned(
-      top: 130,
-      left: 10,
-      right: 10,
-      child: Container(
-        width: Get.width,
-        height:50,
-        padding: EdgeInsets.only(left: 15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              spreadRadius: 4,
-              blurRadius: 10,
-            ),
-          ],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: TextFormField(
-          readOnly: true,
-          style: GoogleFonts.poppins(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Color(0xffA7A7A7)),
-          decoration: InputDecoration(
-            hintText: 'Search for a destination',
-            hintStyle: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.bold),
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Icon(
-                Icons.search,
-              ),
-          ),
-            border: InputBorder.none,
-          ),
-        ),
-      ),
-    );
-  }*/
-
-  Widget buildCurrentLocationIcon(){
-    return Align(
-      alignment: Alignment.bottomRight,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 100, right: 12),
-          child: CircleAvatar(
-            radius: 20,
-            backgroundColor: Colors.deepPurple,
-            child: Icon(Icons.my_location, color: Colors.white,),
           ),
         ),
     );
