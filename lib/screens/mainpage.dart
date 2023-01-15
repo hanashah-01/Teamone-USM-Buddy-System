@@ -2,39 +2,21 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:teamone_app/screens/searchpage.dart';
+import 'package:teamone_app/screens/current_location.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  LatLng? currentPosition;
-  final Completer<GoogleMapController> _controller = Completer();
-  Set<Marker> markers = {};
-  @override
-  void initState() {
-    getCurrentLocation();
-    super.initState();
-  }
 
-  void getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      currentPosition = LatLng(position.latitude, position.longitude);
-      markers.add(
-        Marker(
-          markerId: MarkerId('12'),
-          position: currentPosition!,
-          infoWindow: InfoWindow(title: 'Hi!!! Jane\'s here'),
-        ),
-      );
-    });
-  }
+  Completer<GoogleMapController> _controller = Completer();
+
+  static const CameraPosition initialPosition = CameraPosition(target: LatLng(5.354750, 100.302391), zoom: 14.0);
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +43,15 @@ class _MainPageState extends State<MainPage> {
             bottom: 0,
             child: GoogleMap(
               mapType: MapType.terrain,
-              markers: markers,
-              initialCameraPosition: CameraPosition(target: currentPosition!, zoom: 15),
+              initialCameraPosition: initialPosition,
               onMapCreated: (GoogleMapController controller){
                 _controller.complete(controller);
               },
             ),
           ),
           buildProfileTile(),
+
+          buildCurrentLocationIcon(),
       ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -81,14 +64,19 @@ class _MainPageState extends State<MainPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                IconButton(icon: Icon(Icons.menu),
-                    onPressed: () {},
+                IconButton(icon: Icon(Icons.home),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    },
                 ),
                 IconButton(icon: Icon(Icons.search),
                     onPressed: () {
                         Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MapView()),
+                        MaterialPageRoute(builder: (context) => SearchPlaces()),
                       );
                     },
                 ),
@@ -160,4 +148,27 @@ class _MainPageState extends State<MainPage> {
         ),
     );
   }
-}
+
+    Widget buildCurrentLocationIcon(){
+      return Align(
+        alignment: Alignment.bottomRight,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 100, right: 12),
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CurrentLocationScreen()),
+                );
+            },
+              icon: Icon(Icons.my_location, color: Colors.white,),  //icon data for elevated button
+              label: Text(""), //label text
+            ),
+
+        ),
+      );
+    }
+  }
+
+
+
