@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:teamone_app/screens/emergency_page.dart';
+import 'package:teamone_app/screens/profilepage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
 import 'package:teamone_app/screens/current_location.dart';
 
@@ -82,10 +84,20 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(width: 24),
                 IconButton(icon: Icon(Icons.call),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => emergency_page()),
+                      );
+                    },
                 ),
                 IconButton(icon: Icon(Icons.people),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AdminPage()),
+                      );
+                    },
                 ),
               ],
             ),
@@ -105,14 +117,6 @@ class _MainPageState extends State<MainPage> {
 
           child: Row(
             children: [
-
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.deepPurpleAccent,
-              ),
-              const SizedBox(
-                width: 15,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -128,7 +132,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         TextSpan(
-                          text: 'Jane Doe!',
+                          text: ' Test234!',
                           style: TextStyle(
                             color: Colors.deepPurpleAccent,
                             fontFamily: 'Urbanist',
