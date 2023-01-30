@@ -1,4 +1,5 @@
-/* import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:profile/profile.dart';
 import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
@@ -29,10 +30,10 @@ class _AdminPageState extends State<AdminPage> {
         body: Center(
           child: Profile(
             imageUrl: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-            name: "Test234",
+            name: "Hana",
             website: "",
             designation: "",
-            email: "test234@gmail.com",
+            email: "hanashah82@student.usm.my",
             phone_number: "01757736053",
           ),
         ),
@@ -86,4 +87,4 @@ class _AdminPageState extends State<AdminPage> {
     ),
     );
   }
-}*/
+}

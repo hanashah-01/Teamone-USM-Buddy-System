@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:teamone_app/screens/addgroup.dart';
 import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/profilepage.dart';
@@ -34,9 +35,14 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         style: TextStyle(color: Colors.white, fontSize: 20),
       ),
     ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => addGroup()),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       body: Stack(

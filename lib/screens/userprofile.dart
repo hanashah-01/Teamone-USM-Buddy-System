@@ -121,57 +121,9 @@ class _UserProfileState extends State<UserProfile> {
         ]
     ),
 
-
-
-
-
-
-
             ]),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        color: Theme.of(context).colorScheme.primary,
-        child: IconTheme(
-          data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(icon: Icon(Icons.home),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
-                    );
-                  },
-                ),
-                IconButton(icon: Icon(Icons.search),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SearchPlaces()),
-                    );
-                  },
-                ),
-                const SizedBox(width: 24),
-                IconButton(icon: Icon(Icons.call),
-                  onPressed: () {},
-                ),
-                IconButton(icon: Icon(Icons.people),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UserProfile()),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+
     );
   }
 }

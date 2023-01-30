@@ -4,7 +4,9 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
+import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/mainpage.dart';
+import 'package:teamone_app/screens/profilepage.dart';
 
 class SearchPlaces extends StatefulWidget {
   const SearchPlaces({Key? key}) : super(key: key);
@@ -71,10 +73,20 @@ class _SearchPlacesState extends State<SearchPlaces> {
                 ),
                 const SizedBox(width: 24),
                 IconButton(icon: Icon(Icons.call),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => emergency_page()),
+                    );
+                  },
                 ),
                 IconButton(icon: Icon(Icons.people),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AdminPage()),
+                    );
+                  },
                 ),
               ],
             ),

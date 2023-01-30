@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:teamone_app/screens/addgroup.dart';
 import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/profilepage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
 import 'package:teamone_app/screens/current_location.dart';
 import 'package:teamone_app/screens/userprofile.dart';
-import 'package:teamone_app/screens/viewprofile.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -35,7 +35,12 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => addGroup()),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       body: Stack(
