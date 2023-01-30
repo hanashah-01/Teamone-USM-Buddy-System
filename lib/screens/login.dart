@@ -31,59 +31,37 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     return Scaffold(
       backgroundColor: hexStringToColor("FFFFFF"),
       body: SafeArea(
-        child: Column(
-            children: [
-              SizedBox(height: 36),
+        child: SingleChildScrollView(
+          child: Column(
+              children: [
+                SizedBox(height: 36),
 
-              Padding(
-                padding: const EdgeInsets.only(right: 320),
-                child: GestureDetector(
-                    onTap: () =>
-                        Navigator.of(context).push(new MaterialPageRoute(
-                            builder: (
-                                BuildContext context) => new HomeScreen())),
-                    child: Image.asset(
-                        "assets/images/back_button.png", height: 41,
-                        width: 41)),
-              ),
-
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
-                child: Text(
-                    'Welcome Back! Glad\nto see you again!',
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
-                    )),
-              ),
-              SizedBox(height: 20),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: TextField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter your student e-mail',
-                        )
-                    ),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 320),
+                  child: GestureDetector(
+                      onTap: () =>
+                          Navigator.of(context).push(new MaterialPageRoute(
+                              builder: (
+                                  BuildContext context) => new HomeScreen())),
+                      child: Image.asset(
+                          "assets/images/back_button.png", height: 41,
+                          width: 41)),
                 ),
-              ),
 
-              SizedBox(height: 10),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right: 25),
+                  child: Text(
+                      'Welcome Back! Glad\nto see you again!',
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                      )),
+                ),
+                SizedBox(height: 20),
 
-              Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
@@ -94,97 +72,121 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: TextField(
-                          controller: _passwordController,
-                          obscureText: true,
+                          controller: _emailController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Enter your password',
+                            hintText: 'Enter your student e-mail',
                           )
                       ),
                     ),
-                  )
-              ),
-              SizedBox(height: 15),
+                  ),
+                ),
 
-              Padding(
-                padding: const EdgeInsets.only(right: 22),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return ForgotPassScreen();
-                      },
+                SizedBox(height: 10),
+
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: TextField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Enter your password',
+                            )
                         ),
-                        );
-              },
+                      ),
+                    )
+                ),
+                SizedBox(height: 15),
+
+                Padding(
+                  padding: const EdgeInsets.only(right: 22),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return ForgotPassScreen();
+                        },
+                          ),
+                          );
+                },
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) => new MainPage())),
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.black87,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),),
+
+                SizedBox(height: 180),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (BuildContext context) => new SignUpPage())),
                       child: Text(
-                        "Forgot Password?",
+                        ' Register Now',
                         style: TextStyle(
                           fontFamily: 'Urbanist',
+                          color: hexStringToColor("9E88B2"),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-
-              SizedBox(height: 20),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (BuildContext context) => new MainPage())),
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.black87,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontFamily: 'Urbanist',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),),
-
-              SizedBox(height: 180),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new SignUpPage())),
-                    child: Text(
-                      ' Register Now',
-                      style: TextStyle(
-                        fontFamily: 'Urbanist',
-                        color: hexStringToColor("9E88B2"),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ]),
+              ]),
+        ),
       ),
     );
   }

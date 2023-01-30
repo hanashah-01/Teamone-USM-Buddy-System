@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:teamone_app/screens/homescreen.dart';
 import 'package:teamone_app/screens/login.dart';
@@ -37,101 +38,33 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: hexStringToColor("FFFFFF"),
       body:SafeArea(
-        child: Column(
-            children: [
-              SizedBox(height: 36),
+        child: SingleChildScrollView(
+          child: Column(
+              children: [
+                SizedBox(height: 36),
 
-              Padding(
-                padding: const EdgeInsets.only(right:320),
-                child: GestureDetector(
-                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new HomeScreen())),
-                    child: Image.asset("assets/images/back_button.png", height: 41, width: 41)),
-              ),
-
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
-                child: Text(
-                    'Hello! Register to get\nstarted',
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
-                    )),
-              ),
-              SizedBox(height: 20),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: TextField(
-                        controller: _fullNameController,
-                        decoration: InputDecoration(
-                          border:InputBorder.none,
-                          hintText: 'Full Name',
-                        )
-                    ),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(right:320),
+                  child: GestureDetector(
+                      onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (BuildContext context) => new HomeScreen())),
+                      child: Image.asset("assets/images/back_button.png", height: 41, width: 41)),
                 ),
-              ),
 
-              SizedBox(height: 10),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: TextField(
-                        controller: _phoneNumberController,
-                        decoration: InputDecoration(
-                          border:InputBorder.none,
-                          hintText: 'Phone Number',
-                        )
-                    ),
-                  ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(right: 25),
+                  child: Text(
+                      'Hello! Register to get\nstarted',
+                      style: TextStyle(
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                      )),
                 ),
-              ),
+                SizedBox(height: 20),
 
-              SizedBox(height: 10),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: TextField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          border:InputBorder.none,
-                          hintText: 'Student E-mail',
-                        )
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 10),
-
-              Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
@@ -141,21 +74,27 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: TextField(
-                          controller: _passwordController,
-                          obscureText: true,
+                      child: TextFormField(
+                          controller: _fullNameController,
                           decoration: InputDecoration(
                             border:InputBorder.none,
-                            hintText: 'Enter your password',
-                          )
+                            hintText: 'Full Name',
+                          ),
+                          validator: (value){
+                            if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
+                              return "Enter correct name";
+                    }else{
+                              return null;
+                    }
+                    }
                       ),
                     ),
-                  )
-              ),
+                  ),
+                ),
 
-              SizedBox(height: 10),
+                SizedBox(height: 10),
 
-              Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
@@ -165,72 +104,158 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: TextField(
-                          controller: _confirmPasswordController,
-                          obscureText: true,
+                      child: TextFormField(
+                          controller: _phoneNumberController,
                           decoration: InputDecoration(
                             border:InputBorder.none,
-                            hintText: 'Confirm password',
-                          )
+                            hintText: 'Phone Number',
+                          ),
+                          validator: (value){
+                        if(value!.isEmpty || !RegExp(r'^[+]*[(]{0,1}[0-9]{1-4}[)]{0,1}[-\s\./0-9]+$').hasMatch(value!)){
+                        return "Enter correct phone number";
+                        }else{
+                        return null;
+                        }
+                        }
                       ),
                     ),
-                  )
-              ),
-
-              SizedBox(height: 20),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.black87,
-                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: signUp,
+                ),
 
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          fontFamily: 'Urbanist',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                SizedBox(height: 10),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            border:InputBorder.none,
+                            hintText: 'Student E-mail',
+                          ),
+                        validator: (value) {
+                          if (value!.isEmpty || !RegExp(
+                              r'^[a-zA-Z0-9._%+-]+@student\.usm\.my$').hasMatch(
+                              value!)) {
+                            return "Enter correct email address";
+                          } else {
+                            return null;
+                          }
+                        }),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 10),
+
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: TextField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border:InputBorder.none,
+                              hintText: 'Enter your password',
+                            )
+                        ),
+                      ),
+                    )
+                ),
+
+                SizedBox(height: 10),
+
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: TextField(
+                            controller: _confirmPasswordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border:InputBorder.none,
+                              hintText: 'Confirm password',
+                            )
+                        ),
+                      ),
+                    )
+                ),
+
+                SizedBox(height: 20),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: signUp,
+
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),),
+                  ),),
 
-              SizedBox(height: 40),
+                SizedBox(height: 40),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (BuildContext context) => new LoginPage())),
-                    child: Text(
-                      ' Login Here',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
-                        color: hexStringToColor("9E88B2"),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ]),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                          builder: (BuildContext context) => new LoginPage())),
+                      child: Text(
+                        ' Login Here',
+                        style: TextStyle(
+                          fontFamily: 'Urbanist',
+                          color: hexStringToColor("9E88B2"),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+        ),
       ),
     );
   }
