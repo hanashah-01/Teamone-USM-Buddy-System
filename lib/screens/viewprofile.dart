@@ -62,7 +62,8 @@ class _ViewProfileState extends State<ViewProfile> {
                 Padding(
                   padding: const EdgeInsets.only(right: 25),
                   child: Text(
-                      user.displayName!,
+                      //user.displayName!,
+                    "Hana Shah",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.normal,
@@ -90,7 +91,8 @@ class _ViewProfileState extends State<ViewProfile> {
                 Padding(
                   padding: const EdgeInsets.only(right: 25),
                   child: Text(
-                      user.email!,
+                      //user.email!,
+                      "hanashah82@student.usm.my",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.normal,
@@ -118,7 +120,8 @@ class _ViewProfileState extends State<ViewProfile> {
                 Padding(
                   padding: const EdgeInsets.only(right: 25),
                   child: Text(
-                      user.phoneNumber!,
+                      //user.phoneNumber!,
+                      "013-2308970",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.normal,

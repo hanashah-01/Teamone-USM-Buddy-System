@@ -114,7 +114,6 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: Center(
                       child: GestureDetector(
-                        onTap: signUp,
 
                         child: Text(
                           'Save',

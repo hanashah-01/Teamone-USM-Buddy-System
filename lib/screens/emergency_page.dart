@@ -4,6 +4,8 @@ import 'package:teamone_app/Components/personal_emergency_contacts.dart';
 import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/profilepage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
+import 'package:teamone_app/screens/userprofile.dart';
+import 'package:teamone_app/screens/viewprofile.dart';
 
 class emergency_page extends StatefulWidget {
   const emergency_page({Key? key}) : super(key: key);
@@ -88,7 +90,7 @@ class _emergency_pageState extends State<emergency_page>
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AdminPage()),
+                      MaterialPageRoute(builder: (context) => UserProfile()),
                     );
                   },
                 ),

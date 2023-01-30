@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teamone_app/screens/mainpage.dart';
+import 'package:teamone_app/screens/searchpage.dart';
 import 'package:teamone_app/screens/signup.dart';
 import 'package:teamone_app/screens/viewprofile.dart';
 
@@ -54,7 +55,8 @@ class _UserProfileState extends State<UserProfile> {
 
               Center(
                   child: Text(
-                      user.displayName!,
+                      //user.displayName!,
+                    "Hana Shah",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.bold,
@@ -66,7 +68,8 @@ class _UserProfileState extends State<UserProfile> {
 
               Center(
                   child: Text(
-                      user.phoneNumber!,
+                      //user.phoneNumber!,
+                    "0132308970",
                       style: TextStyle(
                         fontFamily: 'Urbanist',
                         fontWeight: FontWeight.normal,
@@ -125,6 +128,49 @@ class _UserProfileState extends State<UserProfile> {
 
 
             ]),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Theme.of(context).colorScheme.primary,
+        child: IconTheme(
+          data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(icon: Icon(Icons.home),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  },
+                ),
+                IconButton(icon: Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SearchPlaces()),
+                    );
+                  },
+                ),
+                const SizedBox(width: 24),
+                IconButton(icon: Icon(Icons.call),
+                  onPressed: () {},
+                ),
+                IconButton(icon: Icon(Icons.people),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserProfile()),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

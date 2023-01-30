@@ -6,6 +6,8 @@ import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/profilepage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
+import 'package:teamone_app/screens/userprofile.dart';
+import 'package:teamone_app/screens/viewprofile.dart';
 
 class CurrentLocationScreen extends StatefulWidget {
   const CurrentLocationScreen({Key? key}) : super(key: key);
@@ -98,7 +100,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AdminPage()),
+                      MaterialPageRoute(builder: (context) => UserProfile()),
                     );
                   },
                 ),

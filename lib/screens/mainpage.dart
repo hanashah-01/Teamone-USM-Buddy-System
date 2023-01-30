@@ -6,6 +6,8 @@ import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/profilepage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
 import 'package:teamone_app/screens/current_location.dart';
+import 'package:teamone_app/screens/userprofile.dart';
+import 'package:teamone_app/screens/viewprofile.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -95,7 +97,7 @@ class _MainPageState extends State<MainPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AdminPage()),
+                        MaterialPageRoute(builder: (context) => UserProfile()),
                       );
                     },
                 ),
@@ -132,7 +134,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         TextSpan(
-                          text: ' Test234!',
+                          text: ' Hana Shah!',
                           style: TextStyle(
                             color: Colors.deepPurpleAccent,
                             fontFamily: 'Urbanist',

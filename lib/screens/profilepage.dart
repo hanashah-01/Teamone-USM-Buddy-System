@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:profile/profile.dart';
+/* import 'package:flutter/material.dart';
 import 'package:teamone_app/screens/emergency_page.dart';
 import 'package:teamone_app/screens/mainpage.dart';
 import 'package:teamone_app/screens/searchpage.dart';
@@ -87,4 +86,4 @@ class _AdminPageState extends State<AdminPage> {
     ),
     );
   }
-}
+}*/
